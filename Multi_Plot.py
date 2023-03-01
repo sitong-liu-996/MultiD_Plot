@@ -32,7 +32,8 @@ app.layout = html.Div([
             'borderStyle': 'dashed',
             'borderRadius': '5px',
             'textAlign': 'center',
-            'margin': '10px'
+            'margin': '10px',
+            'fontSize': '20px'
         },
         multiple=False
     ),
@@ -108,11 +109,11 @@ def update_output(contents, filename):
 
         sample_options = [{'label': s, 'value': s} for s in df['Sample'].unique()]
         return html.Div([
-            html.H5(filename),
+            html.H5('Uploaded: {}'.format(filename), style={'fontSize': '18px'}),
             html.Hr(),
-            html.P('Run Name: {}'.format(orig_data['Run'].unique())),
-            html.P('Number of rows: {}'.format(len(df))),
-            html.P('Number of columns: {}'.format(len(df.columns)))
+            html.P('Run Name: {}'.format(orig_data['Run'].unique()), style={'fontSize': '18px'}),
+            html.P('Number of rows: {}'.format(len(df)), style={'fontSize': '18px'}),
+            html.P('Number of columns: {}'.format(len(df.columns)), style={'fontSize': '18px'})
         ]), sample_options
     else:
         df = pd.DataFrame()
