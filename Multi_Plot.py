@@ -162,14 +162,14 @@ def update_output(contents, filename):
     Input('sample-dropdown', 'value')
 )
 def update_selected_points_table(selected_data, labeling, existing_table, selected_sample):
-
     # create a Dash HTML table component from the DataFrame
     table_rows = []
     for col in ['FAM_labeling', 'VIC_labeling', 'ABY_labeling', 'JUN_labeling']:
         count = df[col].value_counts().get('Pos', 0)
         for C40_col in df.filter(regex='^C40_').columns:
             if col.split("_")[0] in C40_col:
-                total_data_points = df[df[C40_col].notnull()].shape[0]
+                #total_data_points = df[df[C40_col].notnull()].shape[0]
+                total_data_points = df[(df[C40_col].notnull()) & (df['Sample'] == selected_sample)].shape[0]
                 table_rows.append(
                     html.Tr([html.Td(col), html.Td(count),
                              html.Td(total_data_points)]))
@@ -300,4 +300,3 @@ def display_selected_count(selectedData, selected_sample):
 # Run app
 if __name__ == '__main__':
     app.run_server(debug=True)
-
